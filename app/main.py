@@ -7,15 +7,15 @@ class Validator(ABC):
     def __set_name__(self, owner: str, name: str) -> None:
         self.public_name, self.protected_name = name, "_" + name
 
-    def __get__(self, instance: Number | OneOf, owner: str) -> str | int:
+    def __get__(self, instance: BurgerRecipe, owner: str) -> str | int:
         return getattr(instance, self.protected_name)
 
-    def __set__(self, instance: Number | OneOf, value: str | int) -> None:
+    def __set__(self, instance: BurgerRecipe, value: str | int) -> None:
         self.validate(value)
         setattr(instance, self.protected_name, value)
 
     @abstractmethod
-    def validate(self, value: int | str) -> None:
+    def validate(self, value: int) -> None:
         pass
 
 
